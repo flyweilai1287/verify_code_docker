@@ -5,9 +5,9 @@ import time
 import datetime
 from argparse import ArgumentParser
 
-import pytesseract
 from PIL import Image
 from flask import Flask, request, jsonify
+from . import pytesseract
 
 app = Flask(__name__)
 
@@ -27,7 +27,8 @@ def yh_client():
     start = time.time()
     image = request.files['image']
     image = Image.open(image)
-    code = pytesseract.image_to_string(image, config='-psm 7')
+    code = pytesseract.image_to_string(image) #在win下去掉了psm7
+    # code = pytesseract.image_to_string(image, config='-psm 7')
     use_time = time.time() - start
     try:
         write_to_influxdb(use_time)
