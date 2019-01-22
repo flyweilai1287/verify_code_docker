@@ -35,7 +35,7 @@ def yh_client():
     return jsonify({'result': code}), 201
 
 @app.route('/gj_client', methods=['POST'])
-def yh_client():
+def gj_client():
     start = time.time()
     image = request.files['image']
     image = Image.open(image)
