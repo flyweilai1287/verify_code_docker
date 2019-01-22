@@ -21,8 +21,20 @@ def yh():
         image, lang='chi_sim', config='-psm 7 digits')
     return map_numbers(code)
 
-
 @app.route('/yh_client', methods=['POST'])
+def yh_client():
+    start = time.time()
+    image = request.files['image']
+    image = Image.open(image)
+    code = pytesseract.image_to_string(image, config='-psm 7')
+    use_time = time.time() - start
+    try:
+        write_to_influxdb(use_time)
+    except:
+        pass
+    return jsonify({'result': code}), 201
+
+@app.route('/gj_client', methods=['POST'])
 def yh_client():
     start = time.time()
     image = request.files['image']

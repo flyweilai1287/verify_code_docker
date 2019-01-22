@@ -24,10 +24,13 @@ numpy_installed = find_loader('numpy') is not None
 if numpy_installed:
     from numpy import ndarray
 
-# CHANGE THIS IF TESSERACT IS NOT IN YOUR PATH, OR IS NAMED DIFFERENTLY
-# tesseract_cmd = 'tesseract'
-#需要将tesseract的安装路径写到这里，没有在linux安装
-tesseract_cmd = 'C:\\app\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
+if sys.platform =='linux':
+    # CHANGE THIS IF TESSERACT IS NOT IN YOUR PATH, OR IS NAMED DIFFERENTLY
+    tesseract_cmd = 'tesseract'
+else:
+    #需要将tesseract的安装路径写到这里，没有在linux安装
+    tesseract_cmd = 'C:\\app\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
+
 RGB_MODE = 'RGB'
 OSD_KEYS = {
     'Page number': ('page_num', int),
